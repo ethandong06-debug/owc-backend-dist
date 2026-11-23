@@ -1,8 +1,8 @@
 {
-  "version": "H3.3.1",
-  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.3.1/OWC-V3-backend-H3.3.1-arm64.tar.gz",
-  "sha256": "f6cb788de4aa5b7978dd0c599cd4b1983c30faafccfabee728046cd2091ec42f",
-  "size": 3090936,
-  "signature": "qyVTPYSvYUFszKe6TFj85awqDbYtyKdDKF6s70cPOyXMRPzpDay6bAUmpTo6Qom3HldF6J9t3iykrEWHPQdZCQ==",
-  "notes": "固定发行通道、回退清单、OTA 流式下载与脏状态恢复、HTTPS 监听强校验、限流加固。"
+  "version": "H3.3.3",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.3.3/OWC-V3-backend-H3.3.3-arm64.tar.gz",
+  "sha256": "cf52939dddd072abe2a0913d58460a8d9a33afc0b5351a83e6e298f6548ce078",
+  "size": 3093341,
+  "signature": "viuTfdro6071+D+iMnRY8TLoqImGit83keRMU3A0J4ZkeABKJAnQyYVPUGJjkGQmp1b7eecpjhHQVI4UtitpCw==",
+  "notes": "OTA 安装器 cgroup 逃逸、安装状态 PID 存活检测、诊断 SSRF/TLS 加固、jobs panic 隔离、命令输出限流、nft 原子策略、备份流式归档；真机 H3.3.2→H3.3.3 已闭环。"
 }
