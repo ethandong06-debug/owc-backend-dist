@@ -1,8 +1,6 @@
 {
   "version": "H3.3.0",
-  "tag": "H3.3.0",
-  "pkg_url": "https://aka.doubaocdn.com/s/uoUcndCf2G",
-  "asset_name": "OWC-V3-backend-H3.3.0-arm64.tar.gz",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.3.0/OWC-V3-backend-H3.3.0-arm64.tar.gz",
   "sha256": "9779d5eee31f086a8831553fe6cb387c81ca49150d72784273a05bd6a6c9991b",
   "size": 3088565,
   "signature": "z59HJmJz93AhgRdUlu7zbgu2QBiwNm3l1CopRlTcT/gm9lYFHO1QQjG1A54tou+F+YKoJknbB47vt8YB9otuCA==",
