@@ -1,8 +1,8 @@
 {
-  "version": "H3.3.0",
-  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.3.0/OWC-V3-backend-H3.3.0-arm64.tar.gz",
-  "sha256": "9779d5eee31f086a8831553fe6cb387c81ca49150d72784273a05bd6a6c9991b",
-  "size": 3088565,
-  "signature": "z59HJmJz93AhgRdUlu7zbgu2QBiwNm3l1CopRlTcT/gm9lYFHO1QQjG1A54tou+F+YKoJknbB47vt8YB9otuCA==",
-  "notes": "原生 OTA、HTTPS 控制面、安装回滚、内存分项；首次从旧后端升级仍需引导安装一次。"
+  "version": "H3.3.1",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.3.1/OWC-V3-backend-H3.3.1-arm64.tar.gz",
+  "sha256": "f6cb788de4aa5b7978dd0c599cd4b1983c30faafccfabee728046cd2091ec42f",
+  "size": 3090936,
+  "signature": "qyVTPYSvYUFszKe6TFj85awqDbYtyKdDKF6s70cPOyXMRPzpDay6bAUmpTo6Qom3HldF6J9t3iykrEWHPQdZCQ==",
+  "notes": "固定发行通道、回退清单、OTA 流式下载与脏状态恢复、HTTPS 监听强校验、限流加固。"
 }
