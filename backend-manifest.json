@@ -1,8 +1,8 @@
 {
-  "version": "H3.3.3",
-  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.3.3/OWC-V3-backend-H3.3.3-arm64.tar.gz",
-  "sha256": "cf52939dddd072abe2a0913d58460a8d9a33afc0b5351a83e6e298f6548ce078",
-  "size": 3093341,
-  "signature": "viuTfdro6071+D+iMnRY8TLoqImGit83keRMU3A0J4ZkeABKJAnQyYVPUGJjkGQmp1b7eecpjhHQVI4UtitpCw==",
-  "notes": "OTA 安装器 cgroup 逃逸、安装状态 PID 存活检测、诊断 SSRF/TLS 加固、jobs panic 隔离、命令输出限流、nft 原子策略、备份流式归档；真机 H3.3.2→H3.3.3 已闭环。"
+  "version": "H3.4.0",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.0/OWC-V3-backend-H3.4.0-arm64.tar.gz",
+  "sha256": "44b48b89d6428767d9bff8380ee238d38cfeac61d97d8ea45f06a1162d5664da",
+  "size": 3101012,
+  "signature": "G1WjbSQF3EUVswFnrnXz8GrV6U4DJDlUU0k52tMmUVjNINBkSgpeEcl+QO+Dl8iIiavPSQNWuFAfI8KslIuLCA==",
+  "notes": "后端更新源可在 App 内切换：自定义 HTTPS 清单主源与兜底源、逐源连通性/验签探测、一键恢复 GitHub 官方源；配置持久化到 /etc/owc/update 并重启生效。"
 }
