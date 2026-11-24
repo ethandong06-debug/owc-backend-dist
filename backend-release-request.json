@@ -1,0 +1,10 @@
+{
+  "version": "H3.4.3",
+  "tag": "H3.4.3",
+  "pkg_url": "https://aka.doubaocdn.com/s/sD5EqmSyjs",
+  "asset_name": "OWC-V3-backend-H3.4.3-arm64.tar.gz",
+  "sha256": "925bc2fc4a019b4452186999996bdb4105b508c9299a96e310183abe37bcd6d3",
+  "size": 3116973,
+  "signature": "w77IObbWzfNjSMaHg3cLQ+G5eSF6CqUCbqrqPfttO1HaQtGduYJPwhOiNW3JIZBgQF82F7o7nwe0D85lk0/yAg==",
+  "notes": "历史 24h 降频 15s 并批量写段头；新增 auth logout；备份保留 20 份/200 MiB 与锁定、列表缓存。"
+}
