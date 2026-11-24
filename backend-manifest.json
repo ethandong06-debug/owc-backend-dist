@@ -1,8 +1,8 @@
 {
-  "version": "H3.4.2",
-  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.2/OWC-V3-backend-H3.4.2-arm64.tar.gz",
-  "sha256": "d2c3e309c19c7b74629b4c5834ce6c17bf81b465f8da5e75793f16158d71eb0f",
-  "size": 3109813,
-  "signature": "j+dTQUf5kmvghJrRrQAcxSy0u30IjkKHWPnpbqxuxwI+IpIInVwt7ctHBYHm7+K3uMwxx+B642DYNa7arw74BA==",
-  "notes": "认证限流器改为只读探测、有界 key 与 SID 哈希；事务 watchdog 到期后重试抢锁，失败写 journal 并重启兜底；备份下载流式输出并延长本次写超时。"
+  "version": "H3.4.3",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.3/OWC-V3-backend-H3.4.3-arm64.tar.gz",
+  "sha256": "925bc2fc4a019b4452186999996bdb4105b508c9299a96e310183abe37bcd6d3",
+  "size": 3116973,
+  "signature": "w77IObbWzfNjSMaHg3cLQ+G5eSF6CqUCbqrqPfttO1HaQtGduYJPwhOiNW3JIZBgQF82F7o7nwe0D85lk0/yAg==",
+  "notes": "历史 24h 降频 15s 并批量写段头；新增 auth logout；备份保留 20 份/200 MiB 与锁定、列表缓存。"
 }
