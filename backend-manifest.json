@@ -1,8 +1,8 @@
 {
-  "version": "H3.4.3",
-  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.3/OWC-V3-backend-H3.4.3-arm64.tar.gz",
-  "sha256": "925bc2fc4a019b4452186999996bdb4105b508c9299a96e310183abe37bcd6d3",
-  "size": 3116973,
-  "signature": "w77IObbWzfNjSMaHg3cLQ+G5eSF6CqUCbqrqPfttO1HaQtGduYJPwhOiNW3JIZBgQF82F7o7nwe0D85lk0/yAg==",
-  "notes": "历史 24h 降频 15s 并批量写段头；新增 auth logout；备份保留 20 份/200 MiB 与锁定、列表缓存。"
+  "version": "H3.4.4",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.4/OWC-V3-backend-H3.4.4-arm64.tar.gz",
+  "sha256": "8e5010b2615734b7c4be2c92a98d11b916f809de031da36a70c9006f336ec0e5",
+  "size": 3131441,
+  "signature": "wFMr3Kone6HTGyKRmxKPpqAYY+iGv6iav75v0tspu4587fVocR20RXGoN+jId4SHALlOQE9dOFuCBIoTS0fPBw==",
+  "notes": "H3.4.4: 历史查询流式聚合；JSON gzip BestSpeed+池化；历史 single-flight；WireGuard 3s/30s 缓存；WiFi iwinfo info 30s 缓存。go test/race/vet/build 通过，后端 selftest 通过。"
 }
