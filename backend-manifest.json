@@ -1,8 +1,8 @@
 {
-  "version": "H3.4.5",
-  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.5/OWC-V3-backend-H3.4.5-arm64.tar.gz",
-  "sha256": "516cf81d019e9ba9d987a7f9c2024f423418bd55c05274970b7900e036a60c87",
-  "size": 3150806,
-  "signature": "oshaNiDQJd1hjBHfoqOT9mkliKNaj1+C/13sBqA3LbcUwR6z2lgox4DIkwZmV5jdEt44IykXO3snBF2y+5w0DQ==",
-  "notes": "H3.4.5: 网络硬件加速状态/切换、NSS/PPE debugfs 流量计数、固件缺功能安全降级；配套 App A3.7.7。"
+  "version": "H3.4.6",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.6/OWC-V3-backend-H3.4.6-arm64.tar.gz",
+  "sha256": "662ef537ab350b23346dce129ef07fbf5e3229eba847a9873f33411244a830fb",
+  "size": 3163145,
+  "signature": "GrQ8zOZy/NOvUJVb8+YvpQKnYAGmEfpA+WeI73xEDG/ZL3tR71oxCEDcCjSBRQwhe2+XnpXYCZxe4rfh64PuCg==",
+  "notes": "H3.4.6: 网络页数据面与线路质量接口。WAN 补 MAC/MTU/IPv6/在线时长/链路变化/收发/错包；LAN 补 CIDR/DHCP 池与租约/静态租约/ARP 邻居；端口补速率/双工/收发/错包；新增 GET /api/v1/network/quality（45 秒缓存，?refresh=1 强制）。go test/vet 通过；未真机验收。配套 App A3.7.12。"
 }
