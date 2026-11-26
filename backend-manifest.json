@@ -1,8 +1,8 @@
 {
-  "version": "H3.4.4",
-  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.4/OWC-V3-backend-H3.4.4-arm64.tar.gz",
-  "sha256": "8e5010b2615734b7c4be2c92a98d11b916f809de031da36a70c9006f336ec0e5",
-  "size": 3131441,
-  "signature": "wFMr3Kone6HTGyKRmxKPpqAYY+iGv6iav75v0tspu4587fVocR20RXGoN+jId4SHALlOQE9dOFuCBIoTS0fPBw==",
-  "notes": "H3.4.4: 历史查询流式聚合；JSON gzip BestSpeed+池化；历史 single-flight；WireGuard 3s/30s 缓存；WiFi iwinfo info 30s 缓存。go test/race/vet/build 通过，后端 selftest 通过。"
+  "version": "H3.4.5",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.5/OWC-V3-backend-H3.4.5-arm64.tar.gz",
+  "sha256": "516cf81d019e9ba9d987a7f9c2024f423418bd55c05274970b7900e036a60c87",
+  "size": 3150806,
+  "signature": "oshaNiDQJd1hjBHfoqOT9mkliKNaj1+C/13sBqA3LbcUwR6z2lgox4DIkwZmV5jdEt44IykXO3snBF2y+5w0DQ==",
+  "notes": "H3.4.5: 网络硬件加速状态/切换、NSS/PPE debugfs 流量计数、固件缺功能安全降级；配套 App A3.7.7。"
 }
