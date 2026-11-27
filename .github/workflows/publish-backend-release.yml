@@ -5,8 +5,6 @@ on:
     paths:
       - backend-release-request.json
   workflow_dispatch:
-  schedule:
-    - cron: '*/10 * * * *'
 
 permissions:
   contents: write
@@ -17,7 +15,7 @@ concurrency:
 
 jobs:
   publish:
-    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip publish]') }}
+    if: ${{ !contains(github.event.head_commit.message, '[skip publish]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +37,6 @@ jobs:
 
       - name: Verify signed request and version
         env:
-          # Ed25519 SubjectPublicKeyInfo DER = 302a300506032b6570032100 + raw public key.
           OWC_MANIFEST_PUBKEY: "302a300506032b6570032100ffef8dfc9e818fe2a0b70c18c2f3b03608707e3d50464f40a355096f142881d5"
         run: |
           set -euo pipefail
@@ -71,7 +68,6 @@ jobs:
               m = re.fullmatch(r'H(\d+)\.(\d+)\.(\d+)', value)
               return tuple(map(int, m.groups())) if m else None
 
-          # Release hygiene: never let a lower backend version replace the latest feed.
           url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/latest/download/backend-manifest.json"
           try:
               current = json.loads(subprocess.check_output(
@@ -161,4 +157,5 @@ jobs:
           git add backend-manifest.json
           git rm backend-release-request.json
           git commit -m "release: backend $VERSION signed manifest [skip publish]"
+          git pull --rebase origin main
           git push
