@@ -1,8 +1,8 @@
 {
-  "version": "H3.4.12",
-  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.12/OWC-V3-backend-H3.4.12-arm64.tar.gz",
-  "sha256": "6168ec3afd759aa8e57a68148723474e20844bb50db5bd1fb3bf407fd6aa68f4",
-  "size": 3222478,
-  "signature": "1XuhYsHZttO0r9rOqA4zyih0LjD+ikxcAWVtyk17OjvYZSoA8UmGutcdwYJG+jq9add3pN4HZKlfej0yTXV7Bw==",
-  "notes": "H3.4.12 高级网络通用对象字段与预检\n\n1. 通用对象 editable_fields 扩充 description、mtu6、macaddr、txqueuelen、ipv6、dadtransmits。\n2. 校验：description ≤64 字节；mtu6 1280–9000；macaddr 小写规范化；txqueuelen 0–100000；dadtransmits 0–100；ipv6=false 写 option ipv6 \"0\"。\n3. 预检 diff 覆盖新字段；改 MAC、关闭 IPv6、改端口、停用对象标记 disconnect_risk，并提示 DHCP/IPv6/DAD/端口重载风险。\n4. 新增 TestNetworkObjectAdvancedDeviceFields，覆盖字段暴露、预检、实际写入与非法值拒绝。\n\n验证：go test ./... 与 go vet ./... 通过。未修改真实路由器配置。\n"
+  "version": "H3.4.13",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.13/OWC-V3-backend-H3.4.13-arm64.tar.gz",
+  "sha256": "f6786fe7c770fe9ae22b0d943d3d5f2fc1ed807b077eca0d89b71d788c3bcb57",
+  "size": 3224350,
+  "signature": "ZR5I6NP22+0jiUGGlFXP0HKECbSEzt7HREvpjDqnLHywX7WFmpuokZbqy+V9BgBPrv7bUhzvOsrN06y623faDg==",
+  "notes": "# H3.4.13 — IPv6 MTU 预检一致性\n\n发布日期：2026-11-28\n类型：arm64 后端包 + GitHub Release 签名清单\n配套 App：A3.7.24\n\n## 变更\n\n- WAN、VLAN、高级网络通用对象预检统一检查“IPv6 仍启用且 MTU 低于 1280”。\n- 命中时返回提示：IPv6 仍启用时 MTU 低于 1280，IPv6 可能无法正常工作。\n- 高级对象在显式关闭 IPv6 时不再误报该警告。\n\n## 验证\n\n- `go test ./...` 通过。\n- `go vet ./...` 通过。\n- 新增 `TestIPv6MTUWarnings`。\n\n## 制品\n\n- `OWC-V3-backend-H3.4.13-arm64.tar.gz`\n- 大小：3,224,350 B\n- SHA256：`f6786fe7c770fe9ae22b0d943d3d5f2fc1ed807b077eca0d89b71d788c3bcb57`\n- 包内 arm64 二进制 SHA256：`1b90330b712fa788defdff64185efbe65f7c840c0497013cdb336c67859aa163`\n\n## 已知限制\n\n- 未在真实 OWC 路由器上做手机端点击验收。\n- 本构建机为 x86_64，arm64 二进制仅做 ELF 架构、版本字符串与 SHA256 校验。"
 }
