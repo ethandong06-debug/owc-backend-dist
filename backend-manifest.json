@@ -1,8 +1,8 @@
 {
-  "version": "H3.4.13",
-  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.13/OWC-V3-backend-H3.4.13-arm64.tar.gz",
-  "sha256": "f6786fe7c770fe9ae22b0d943d3d5f2fc1ed807b077eca0d89b71d788c3bcb57",
-  "size": 3224350,
-  "signature": "ZR5I6NP22+0jiUGGlFXP0HKECbSEzt7HREvpjDqnLHywX7WFmpuokZbqy+V9BgBPrv7bUhzvOsrN06y623faDg==",
-  "notes": "# H3.4.13 — IPv6 MTU 预检一致性\n\n发布日期：2026-11-28\n类型：arm64 后端包 + GitHub Release 签名清单\n配套 App：A3.7.24\n\n## 变更\n\n- WAN、VLAN、高级网络通用对象预检统一检查“IPv6 仍启用且 MTU 低于 1280”。\n- 命中时返回提示：IPv6 仍启用时 MTU 低于 1280，IPv6 可能无法正常工作。\n- 高级对象在显式关闭 IPv6 时不再误报该警告。\n\n## 验证\n\n- `go test ./...` 通过。\n- `go vet ./...` 通过。\n- 新增 `TestIPv6MTUWarnings`。\n\n## 制品\n\n- `OWC-V3-backend-H3.4.13-arm64.tar.gz`\n- 大小：3,224,350 B\n- SHA256：`f6786fe7c770fe9ae22b0d943d3d5f2fc1ed807b077eca0d89b71d788c3bcb57`\n- 包内 arm64 二进制 SHA256：`1b90330b712fa788defdff64185efbe65f7c840c0497013cdb336c67859aa163`\n\n## 已知限制\n\n- 未在真实 OWC 路由器上做手机端点击验收。\n- 本构建机为 x86_64，arm64 二进制仅做 ELF 架构、版本字符串与 SHA256 校验。"
+  "version": "H3.4.14",
+  "url": "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.14/OWC-V3-backend-H3.4.14-arm64.tar.gz",
+  "sha256": "380f76dca01120f025b07866ef4454bcffbac4f08b696593cac46684640657cc",
+  "size": 3224413,
+  "signature": "ozCv8V5HXAEFtW1tfmeCbZ4yBraTfhhIVscBKWsVY4IAWf2TrjYcNn8NV3rdj9mLq9DZGMgF4DrWPjkLGsJNAA==",
+  "notes": "# H3.4.14 — 设备类型白名单补齐 pc\n\n- 版本：`H3.4.14`\n- 配套 App：`A3.7.25`\n- 日期：2026-11-28\n- 类型：arm64 后端包 + GitHub Release 签名清单\n\n## 变更\n\n- `internal/routerapi/devices.go` 的 `deviceKinds` 白名单补 `pc`，与 App 的“电脑 / PC”类型对齐。\n- 修复用户把设备标记为 `pc` 时后端返回 `unsupported device kind`、配置无法写入的问题。\n- 新增 `TestSetDeviceKindPCAccepted`：在临时 `StateDir` 写入并读回 `pc`，确认白名单与持久化都接受。\n\n## 验证\n\n- `go test ./...` 全部通过。\n- `go vet ./...` 通过。\n- 同源码 amd64 构建回读 `owc-daemon H3.4.14 (H3.4.14)`。\n- arm64 包内二进制为 ELF 64-bit ARM aarch64，版本字符串含 `H3.4.14`。\n\n## 制品\n\n- `OWC-V3-backend-H3.4.14-arm64.tar.gz`\n- 大小：3,224,413 B\n- SHA256：`380f76dca01120f025b07866ef4454bcffbac4f08b696593cac46684640657cc`\n- 包内 arm64 二进制：8,061,080 B，`eb510ae4cc3c1487c70404fc71741a361570e2ced99c6c9341f9d40448bca376`\n- Release：https://github.com/ethandong06-debug/owc-backend-dist/releases/tag/H3.4.14\n- CDN：https://aka.doubaocdn.com/s/eUvszrqwOW\n- 飞书：https://my.feishu.cn/file/FgTDbLpqao910kxdvj9cMw7Knxb\n\n## 已知限制\n\n- 未在真实 OWC 路由器上做手机端点击验收。\n- 本构建机为 x86_64，arm64 二进制只做 ELF 架构、版本字符串与 SHA256 校验。\n"
 }
