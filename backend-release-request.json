@@ -1,0 +1,14 @@
+{
+  "version": "H3.4.23",
+  "tag": "H3.4.23",
+  "pkg_url": "https://aka.doubaocdn.com/s/0vZ3h67J3N",
+  "download_url": "https://aka.doubaocdn.com/s/0vZ3h67J3N",
+  "asset_name": "OWC-V3-backend-H3.4.23-arm64.tar.gz",
+  "sha256": "5fd0009b9e9712bb61400141b84a268b60f14038ba7a8939037cc92833739493",
+  "size": 3229559,
+  "signature": "99sSZdAWnxJom7ws+wCE2Q4JlyGyPB5GMSWeo7CmnOIO/Yiu6IUXQeHW3eelBsOx8mbCgGJI2Qk9OCi+3JfQAw==",
+  "mirror_urls": [
+    "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.23/OWC-V3-backend-H3.4.23-arm64.tar.gz"
+  ],
+  "notes": "# H3.4.23 — OTA 下载进度与镜像尝试可见\n\n- 版本：`H3.4.23`\n- 配套 App：`A3.7.39 / 30739`\n- 日期：2026-11-28\n- 类型：arm64 后端包 + GitHub Release 签名清单\n\n## 变更\n\n- OTA 下载状态新增 `download_bytes`、`download_total`、`download_source`、`download_attempt`、`download_attempts`，App 可显示真实字节进度、当前源与第几个镜像。\n- `Apply` 返回也带 `download_total` 与 `download_attempts`；仍保持异步受理立即返回 `downloading`。\n- 下载按 `url + mirror_urls` 顺序尝试，每个源开始时进度归零，消息标明“主源不可用，正在从 host 下载升级包（第 n/m 源）”。\n- 下载完成后写入“升级包下载完成，正在校验”，再进入安装；失败写入具体原因与源主机。\n- 签名 canonical 不变（`version\\nsha256\\nsize`），旧 App 可忽略新增字段。\n- 未修改真实路由器配置，未改变 API 路由与既有必需字段。\n\n## 验证\n\n- `go test ./...`：全部包 ok，exit 0。\n- `go vet ./...`：无输出，exit 0。\n- `gofmt -l .`：无输出。\n- 新增 `TestDownloadReportsProgress` 验证源主机、最终字节、总大小、attempt/attempts；Apply 断言 `download_total` 与 `download_attempts`。\n- arm64 二进制为 ELF 64-bit ARM aarch64；包内版本字符串为 H3.4.23。\n\n## 制品\n\n- `OWC-V3-backend-H3.4.23-arm64.tar.gz`\n- 大小：3,229,559 B\n- SHA256：`5fd0009b9e9712bb61400141b84a268b60f14038ba7a8939037cc92833739493`\n- CDN：https://aka.doubaocdn.com/s/0vZ3h67J3N\n- Release：https://github.com/ethandong06-debug/owc-backend-dist/releases/tag/H3.4.23\n\n## 兼容与升级\n\n- API 路由与已有字段不变；旧 App 仍可读取 `update_available` 与 `state`。\n- H3.4.22 可直接升级到 H3.4.23；下载中状态新增字段，旧 UI 会忽略。\n- 安装包继续使用既有 arm64 部署结构和 `owcd-v3` 服务名。\n\n## 已知限制\n\n- 未在真实 OWC 路由器上做手机端点击验收。\n- 后台 goroutine 依赖进程存活；进程异常退出后由 5 分钟 stale 判定允许重试。\n"
+}
