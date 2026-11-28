@@ -1,11 +1,11 @@
 {
-  "version": "H3.4.23",
-  "url": "https://aka.doubaocdn.com/s/0vZ3h67J3N",
-  "sha256": "5fd0009b9e9712bb61400141b84a268b60f14038ba7a8939037cc92833739493",
-  "size": 3229559,
-  "signature": "99sSZdAWnxJom7ws+wCE2Q4JlyGyPB5GMSWeo7CmnOIO/Yiu6IUXQeHW3eelBsOx8mbCgGJI2Qk9OCi+3JfQAw==",
-  "notes": "# H3.4.23 — OTA 下载进度与镜像尝试可见\n\n- 版本：`H3.4.23`\n- 配套 App：`A3.7.39 / 30739`\n- 日期：2026-11-28\n- 类型：arm64 后端包 + GitHub Release 签名清单\n\n## 变更\n\n- OTA 下载状态新增 `download_bytes`、`download_total`、`download_source`、`download_attempt`、`download_attempts`，App 可显示真实字节进度、当前源与第几个镜像。\n- `Apply` 返回也带 `download_total` 与 `download_attempts`；仍保持异步受理立即返回 `downloading`。\n- 下载按 `url + mirror_urls` 顺序尝试，每个源开始时进度归零，消息标明“主源不可用，正在从 host 下载升级包（第 n/m 源）”。\n- 下载完成后写入“升级包下载完成，正在校验”，再进入安装；失败写入具体原因与源主机。\n- 签名 canonical 不变（`version\\nsha256\\nsize`），旧 App 可忽略新增字段。\n- 未修改真实路由器配置，未改变 API 路由与既有必需字段。\n\n## 验证\n\n- `go test ./...`：全部包 ok，exit 0。\n- `go vet ./...`：无输出，exit 0。\n- `gofmt -l .`：无输出。\n- 新增 `TestDownloadReportsProgress` 验证源主机、最终字节、总大小、attempt/attempts；Apply 断言 `download_total` 与 `download_attempts`。\n- arm64 二进制为 ELF 64-bit ARM aarch64；包内版本字符串为 H3.4.23。\n\n## 制品\n\n- `OWC-V3-backend-H3.4.23-arm64.tar.gz`\n- 大小：3,229,559 B\n- SHA256：`5fd0009b9e9712bb61400141b84a268b60f14038ba7a8939037cc92833739493`\n- CDN：https://aka.doubaocdn.com/s/0vZ3h67J3N\n- Release：https://github.com/ethandong06-debug/owc-backend-dist/releases/tag/H3.4.23\n\n## 兼容与升级\n\n- API 路由与已有字段不变；旧 App 仍可读取 `update_available` 与 `state`。\n- H3.4.22 可直接升级到 H3.4.23；下载中状态新增字段，旧 UI 会忽略。\n- 安装包继续使用既有 arm64 部署结构和 `owcd-v3` 服务名。\n\n## 已知限制\n\n- 未在真实 OWC 路由器上做手机端点击验收。\n- 后台 goroutine 依赖进程存活；进程异常退出后由 5 分钟 stale 判定允许重试。\n",
+  "version": "H3.4.24",
+  "url": "https://aka.doubaocdn.com/s/zUUbvbbY9d",
+  "sha256": "061a8c48163ab1ff50beaf05e64e0eb8bf2de3a72f708fd85da376fd7bae0196",
+  "size": 3229589,
+  "signature": "M+EchCUCCuL4qAfgnA6CxTwrUaux3ND7D672tFAD38aCYD5no7HzwzSL1x+/ZoR6FNIwUsgEelcVqQtUlOhhDw==",
+  "notes": "# H3.4.24 — OTA 下载前长度预检\n\n- 版本：`H3.4.24`\n- 配套 App：`A3.7.40 / 30740`\n- 日期：2026-11-28\n- 类型：arm64 后端包 + GitHub Release 签名清单\n\n## 变更\n\n- `downloadOne` 在 HTTP 200 后、创建临时文件前检查 `Content-Length`。\n- 响应长度超过后端包上限时直接拒绝，避免路由器先落盘超大错误包。\n- 响应长度与签名清单 `size` 不一致时提前失败，错误写明实际与期望长度。\n- `Content-Length=-1` 的 chunked 响应保持原流程，由复制后的长度与 SHA256 校验兜底。\n- 未改变 API 路由、既有字段、事务行为或真实路由器配置。\n\n## 验证\n\n- `go test ./...`：全部包 ok，exit 0。\n- `go vet ./...`、`gofmt -l .`：无输出。\n- 新增 `TestDownloadRejectsContentLengthMismatch`，验证长度不符时提前失败且不创建部分文件。\n- arm64 二进制为 ELF 64-bit ARM aarch64，包内版本字符串为 H3.4.24。\n\n## 制品\n\n- `OWC-V3-backend-H3.4.24-arm64.tar.gz`\n- 大小：3,229,589 B\n- SHA256：`061a8c48163ab1ff50beaf05e64e0eb8bf2de3a72f708fd85da376fd7bae0196`\n- CDN：https://aka.doubaocdn.com/s/zUUbvbbY9d\n- Release：https://github.com/ethandong06-debug/owc-backend-dist/releases/tag/H3.4.24\n\n## 兼容与升级\n\n- H3.4.23 可直接 OTA 到 H3.4.24；清单签名 canonical 不变，旧 App 可正常验签。\n- 安装包结构与 `owcd-v3` 服务名不变。\n\n## 已知限制\n\n- 未在真实 OWC 路由器上完成手机端点击验收。\n- 不返回 `Content-Length` 的镜像只能等下载完成后再校验，无法提前拒绝。\n",
   "mirror_urls": [
-    "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.23/OWC-V3-backend-H3.4.23-arm64.tar.gz"
+    "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.24/OWC-V3-backend-H3.4.24-arm64.tar.gz"
   ]
 }
