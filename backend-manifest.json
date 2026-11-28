@@ -1,11 +1,11 @@
 {
-  "version": "H3.4.25",
-  "url": "https://aka.doubaocdn.com/s/lkiKim97EB",
-  "sha256": "d2f71b928a5ef7af6cd3252d7a1c7763815e64b10fa55a030d1d7eb88b898029",
-  "size": 3235023,
-  "signature": "bTF9CCZonj8S3d+nfZLsLjDyx4bC/OgMbMONOX9Hf1mhT6lIxfvC+PwpmX0cS42J8xrkF2aIX4JZAb7x19VjDg==",
-  "notes": "# H3.4.25 — 修复后端 OTA 包缺少部署树\n\n- 版本：`H3.4.25`\n- 配套 App：`A3.7.41 / 30741`\n- 日期：2026-11-28\n- 类型：arm64 标准部署包 + GitHub Release 签名清单\n\n## 修复\n\n- 修复 `H3.4.23/H3.4.24` 发布包只含裸二进制导致的 `package is missing binary or init`。\n- 包结构恢复为 `owc-v3-deploy/{bin,config,owc-daemon/dist}`，包含 `install-owcd-v3.sh`、`owcd-v3.init`、`owc-v3-recover.init` 与 `owc-daemon/dist/owc-daemon-linux-arm64`。\n- `manager.go` 缺项报错改为点名缺失路径，不再只给笼统提示。\n- 新增 `TestValidateTarReportsMissingInit` 覆盖缺 init 的回归。\n- 新增 `scripts/package-backend.sh`，打包时自动校验必需条目和二进制版本字符串，缺项即失败。\n\n## 验证\n\n- `go test ./...`、`go vet ./...`、`gofmt -l .` 全部通过。\n- 包内共 9 个条目，二进制版本字符串为 H3.4.25。\n- 已在本地完成包结构、大小与 SHA256 核对；尚未在真实 OWC 路由器上点击 OTA 验证。\n\n## 制品\n\n- `OWC-V3-backend-H3.4.25-arm64.tar.gz`\n- 大小：3,235,023 B\n- SHA256：`d2f71b928a5ef7af6cd3252d7a1c7763815e64b10fa55a030d1d7eb88b898029`\n- CDN：https://aka.doubaocdn.com/s/lkiKim97EB\n- Release：https://github.com/ethandong06-debug/owc-backend-dist/releases/tag/H3.4.25",
+  "version": "H3.4.26",
+  "url": "https://aka.doubaocdn.com/s/6UVKBI2QEY",
+  "sha256": "0bbe4ae7364c4c5275b01e54501bde087702d5c5b676e261c31a18dc6aa90e2d",
+  "size": 3235130,
+  "signature": "16ix2cBtJvi2tTNuvVhrNLlVAVAzBLZTWOib44eUb0Z5ulQ3MzNZtYuRxyvn+CXqjw2BEEJ46vBC/jAecilfAw==",
+  "notes": "# H3.4.26 — OTA 存储预检与陈旧临时包清理\n\n- 版本：`H3.4.26`\n- 配套 App：`A3.7.42 / 30742`\n- 日期：2026-11-28\n- 类型：arm64 标准部署包 + GitHub Release 签名清单\n\n## 改动\n\n- `Apply` 在写 `downloading` 状态前检查可用空间：需要 `包大小 + 8 MiB`，不足直接返回 `ErrInsufficientSpace`，不污染升级状态。\n- API 将 `ErrInsufficientSpace` 映射为 HTTP 507 / `STORAGE_FULL`，App 可提示清理而不是无脑重试。\n- 守护进程启动与每次应用前清理超过 24 小时的 `update-*.tar.gz` 与 `update-*.log`；不碰当前包、`apply.sh` 与无关文件。\n- `Statfs` 不可用时放行，仍由大小与 SHA256 兜底，避免在不支持的文件系统上误阻断升级。\n- 新增存储预检、清理边界、507 映射测试；版本测试改为读取构建期 `build` 变量，减少每次发版手工改断言。\n\n## 验证\n\n- `go test ./...`：全部包 ok。\n- `go vet ./...`、`gofmt -l .`：无输出。\n- 包内 9 个 tar 条目，包含 `bin/install-owcd-v3.sh`、`config/owcd-v3.init`、`config/owc-v3-recover.init`、`owc-daemon/dist/owc-daemon-linux-arm64`。\n- 尚未在真实 OWC 路由器上点击 OTA 验收。\n\n## 制品\n\n- `OWC-V3-backend-H3.4.26-arm64.tar.gz`\n- 大小：3,235,130 B\n- SHA256：`0bbe4ae7364c4c5275b01e54501bde087702d5c5b676e261c31a18dc6aa90e2d`\n- CDN：https://aka.doubaocdn.com/s/6UVKBI2QEY\n- Release：https://github.com/ethandong06-debug/owc-backend-dist/releases/tag/H3.4.26\n\n## 已知限制\n\n- 仅预检瞬间可用空间；下载期间若其他进程大量写盘，仍可能失败，但不会把升级状态卡成半完成。\n- 清理只按 24 小时阈值，频繁失败时仍可能短期堆积多个包；可在 App 重试前先看存储提示。",
   "mirror_urls": [
-    "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.25/OWC-V3-backend-H3.4.25-arm64.tar.gz"
+    "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.26/OWC-V3-backend-H3.4.26-arm64.tar.gz"
   ]
 }
