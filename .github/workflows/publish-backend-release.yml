@@ -29,9 +29,20 @@ jobs:
           missing = [k for k in required if k not in r]
           if missing:
               raise SystemExit('missing fields: ' + ', '.join(missing))
+          mirrors = r.get('mirror_urls', [])
+          if not isinstance(mirrors, list):
+              raise SystemExit('mirror_urls must be a list')
+          for u in mirrors:
+              if not isinstance(u, str) or not u.startswith('https://'):
+                  raise SystemExit('mirror_urls entries must be HTTPS URLs')
+          download_url = str(r.get('download_url') or '').strip()
+          if download_url and not download_url.startswith('https://'):
+              raise SystemExit('download_url must be HTTPS')
           with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as f:
               for k in required[:7]:
                   f.write(f"{k.upper()}={r[k]}\n")
+              f.write(f'DOWNLOAD_URL={download_url}\n')
+              f.write('MIRROR_URLS_JSON=' + json.dumps(mirrors, ensure_ascii=False) + '\n')
               f.write('NOTES<<EOF\n' + r['notes'] + '\nEOF\n')
           PY
 
@@ -99,12 +110,15 @@ jobs:
           import json, os
           m = {
               'version': os.environ['VERSION'],
-              'url': f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/download/{os.environ['TAG']}/{os.environ['ASSET_NAME']}",
+              'url': os.environ.get('DOWNLOAD_URL') or f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/download/{os.environ['TAG']}/{os.environ['ASSET_NAME']}",
               'sha256': os.environ['SHA256'],
               'size': int(os.environ['SIZE']),
               'signature': os.environ['SIGNATURE'],
               'notes': os.environ['NOTES'],
           }
+          mirrors = json.loads(os.environ.get('MIRROR_URLS_JSON', '[]'))
+          if mirrors:
+              m['mirror_urls'] = mirrors
           with open('backend-manifest.json', 'w', encoding='utf-8') as f:
               json.dump(m, f, ensure_ascii=False, indent=2)
               f.write('\n')
@@ -120,8 +134,8 @@ jobs:
           python3 - <<'PY'
           import base64, json, re
           m = json.load(open('backend-manifest.json', encoding='utf-8'))
-          if not m['url'].startswith('https://github.com/'):
-              raise SystemExit('manifest url must point at GitHub releases')
+          if not str(m['url']).startswith('https://'):
+              raise SystemExit('manifest url must use HTTPS')
           if not re.fullmatch(r'[0-9a-f]{64}', m['sha256']):
               raise SystemExit('manifest sha256 invalid')
           canonical = f"{m['version']}\n{m['sha256']}\n{int(m['size'])}"
