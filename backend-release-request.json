@@ -1,0 +1,14 @@
+{
+  "version": "H3.4.22",
+  "tag": "H3.4.22",
+  "pkg_url": "https://aka.doubaocdn.com/s/9L8VfqhHyi",
+  "download_url": "https://aka.doubaocdn.com/s/9L8VfqhHyi",
+  "asset_name": "OWC-V3-backend-H3.4.22-arm64.tar.gz",
+  "sha256": "e74b76b83b258bd6fd0d7c907ebcc4f1e6e97e855baf1acaaf3dacf16a7488cb",
+  "size": 3230641,
+  "signature": "G5IfVayZZ7TBM2WY90GOvu9WpdfjqMeDDhOsOhbBZNsXhLtcMiV8sYDq4zRkKmXP0uix4gr9N+3Llk1hK4fgDg==",
+  "mirror_urls": [
+    "https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.4.22/OWC-V3-backend-H3.4.22-arm64.tar.gz"
+  ],
+  "notes": "# H3.4.22 — 后端 OTA 异步受理与镜像回退\n\n- 版本：`H3.4.22`\n- 配套 App：`A3.7.38 / 30738`\n- 日期：2026-11-28\n- 类型：arm64 后端包 + GitHub Release 签名清单\n\n## 变更\n\n- `POST /api/v1/update/apply` 改为快速受理：校验签名/版本后写 `state=downloading` 并立即返回，下载、校验、启动安装器转后台。\n- 后台下载按 `url + mirror_urls` 顺序回退；每个源都校验大小与 SHA256，失败信息包含源主机。\n- `status` 对 `downloading` 增加 5 分钟 stale 判定，进程异常退出后可重新发起，不会永久卡在下载中。\n- 清单新增 `mirror_urls`，签名 canonical 不变（仍为 `version\\nsha256\\nsize`），旧客户端可忽略新字段。\n- 主下载地址改为直达 CDN，GitHub Release 作为镜像；旧 H3.4.18 同步 Apply 也从 CDN 拉取，降低 15 秒超时概率。\n- 未修改真实路由器配置；未改变 API 路由与既有响应字段。\n\n## 验证\n\n- `go test ./...`：全部包 ok，exit 0。\n- `go vet ./...`：无输出，exit 0。\n- `gofmt -l`：无输出。\n- 新增镜像回退、异步 Apply 快速返回并最终失败、`downloading` stale 三个测试。\n- arm64 二进制为 ELF 64-bit ARM aarch64；包内版本字符串为 H3.4.22。\n\n## 制品\n\n- `OWC-V3-backend-H3.4.22-arm64.tar.gz`\n- 大小：3,230,641 B\n- SHA256：`e74b76b83b258bd6fd0d7c907ebcc4f1e6e97e855baf1acaaf3dacf16a7488cb`\n- CDN：https://aka.doubaocdn.com/s/9L8VfqhHyi\n- Release：https://github.com/ethandong06-debug/owc-backend-dist/releases/tag/H3.4.22\n\n## 兼容与升级\n\n- API 路由与已有字段不变；旧 App 仍可读取 `update_available` 与 `state`。\n- 旧 H3.4.18 的 Apply 仍是同步下载；主 URL 改为 CDN 后应在 15 秒内返回，若仍超时升级 App 后重试即可。\n- 安装包继续使用既有 arm64 部署结构和 `owcd-v3` 服务名。\n\n## 已知限制\n\n- 未在真实 OWC 路由器上做手机端点击验收。\n- 后台 goroutine 依赖进程存活；进程重启后由 5 分钟 stale 判定允许重试。\n"
+}
