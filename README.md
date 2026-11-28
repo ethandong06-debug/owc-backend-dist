@@ -26,7 +26,7 @@ ffef8dfc9e818fe2a0b70c18c2f3b03608707e3d50464f40a355096f142881d5
 version\nsha256\nsize
 ```
 
-`url` 指向本 Release 内的 `OWC-V3-backend-<版本>-arm64.tar.gz`。
+`url` 可指向直达 CDN；GitHub Release 内的 `OWC-V3-backend-<版本>-arm64.tar.gz` 作为 `mirror_urls` 镜像。
 
 ## 发布新版本
 
@@ -39,6 +39,8 @@ version\nsha256\nsize
   "version": "H3.3.1",
   "tag": "H3.3.1",
   "pkg_url": "https://…",
+  "download_url": "https://aka.doubaocdn.com/s/…",
+  "mirror_urls": ["https://github.com/ethandong06-debug/owc-backend-dist/releases/download/H3.3.1/OWC-V3-backend-H3.3.1-arm64.tar.gz"],
   "asset_name": "OWC-V3-backend-H3.3.1-arm64.tar.gz",
   "sha256": "…",
   "size": 1234567,
@@ -52,5 +54,5 @@ version\nsha256\nsize
 ## 边界
 
 - 后端 Release 与 App Release 分仓库，避免 `releases/latest` 互相顶掉。
-- 不把 `aka.doubaocdn.com` 临时链接写进长期清单。
+- CDN 主地址必须保持可长期访问；GitHub Release 必须保留为镜像。不要把短期签名链接当作唯一来源。
 - 不提交签名私钥。
